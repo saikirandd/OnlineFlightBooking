@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import "../static/css/Signup.css";
-import NavBarUser from "./navbar.component"
-import Footer from "./footer"
+import NavBarAdmin from "./navbaradmin"
 import { Link, withRouter } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import Footer from "./footer"
 import classnames from "classnames";
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
+import axios from 'axios';
+import { store } from 'react-notifications-component';
 
-export default class TravellerDetails extends Component {
+export default class AddUser extends Component {
 
   constructor() {
     super();
@@ -19,12 +19,13 @@ export default class TravellerDetails extends Component {
       firstName: "",
       lastName: "",
       email: "",
-      gender:"",
-      contactno: "",
-      dob:""
+      password: "",
+      confirmpassword: "",
+      contactno: ""
+      
     };
     this.handleValueChange = this.handleValueChange.bind(this);
-    this.onChangeDOB = this.onChangeDOB.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -44,11 +45,6 @@ export default class TravellerDetails extends Component {
       [event.target.name]: event.target.value
     });
   }
-  onChangeDOB(dob) {
-    this.setState({
-      dob: dob
-    })
-  }
 
 
   handleSubmit(e) {
@@ -58,9 +54,42 @@ export default class TravellerDetails extends Component {
       lastName: this.state.lastName,
       email: this.state.email,
       password: this.state.password,
-      password2: this.state.confirmpassword,
-      contactNo: this.state.contactno,
+      contactNo: this.state.contactno
     };
+    var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+        if(regularExpression.test(this.state.password)){
+        if (this.state.password == this.state.confirmpassword) {
+          axios.post('http://localhost:5000/users/add', newUser)
+          .then(res => {
+                console.log(res.data)
+                store.addNotification({
+                  title: "User added !",
+                  message: "User is added",
+                  type: "success",
+                  insert: "top",
+                  container: "top-right",
+                  animationIn: ["animated", "fadeIn"],
+                  animationOut: ["animated", "fadeOut"],
+                  width: 300,
+                  dismiss: {
+                    duration: 5000,
+                    onScreen: true
+                  }
+                });
+                this.props.history.push({pathname: '/'})
+          });
+        }
+        else {
+            this.setState({
+                errors: "Passwords should match"
+            });
+        }
+    }
+    else{
+        this.setState({
+            errors: "Password must be atlease 6 characters and should contain atleast one number and one special character"
+        });
+    }
    
   }
 
@@ -68,11 +97,11 @@ export default class TravellerDetails extends Component {
     const { errors } = this.state;
     return (
       <div>
-        <NavBarUser />
+        <NavBarAdmin />
         <div className="signup form-wrapper">
-          <h2>Traveller Details</h2>
+          <h2>Add User</h2>
           <form onSubmit={this.handleSubmit}>
-            <div className="inputBox pull-left width50">
+            <div className="inputBox width70">
               <label htmlFor="firstName">First Name</label>
               <input
                 type="text"
@@ -82,7 +111,7 @@ export default class TravellerDetails extends Component {
                 onChange={this.handleValueChange}            
               />           
             </div>
-            <div className="inputBox width50">
+            <div className="inputBox width70">
               <label htmlFor="lastName">Last Name</label>
               <input
                 type="text"
@@ -115,31 +144,36 @@ export default class TravellerDetails extends Component {
               />
             </div>
             <div className="inputBox width50" style={{float:'left', 'margin-right': '2%'}}>
-              <label htmlFor="dob">Date of Birth</label>
-              <DatePicker 
-                                selected={this.state.dob}
-                                onChange={this.onChangeDOB}
-                            />
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                className="password"
+                placeholder="Password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleValueChange}
+              />
             </div>
             <div className="inputBox width50 ml2">
-              <label htmlFor="gender">Gender</label>
-              <select style={{padding: '5%'}} name="gender" value={this.state.gender} 
-                                    onChange={this.handleValueChange}
-                                    placeholder="Select Gender">  
-                                    <option value="">Select Gender</option>                                  
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    
-                                </select>
+              <label htmlFor="password">Confirm Password</label>
+              <input
+                type="password"
+                className="password"
+                placeholder="Password"
+                name="confirmpassword"
+                value={this.state.confirmpassword}
+                onChange={this.handleValueChange}
+              />
             </div>
             <div className="createAccount mt20">
               <Button 
-                bssize="large" type="submit" onClick={()=>this.props.history.push(
-                  {pathname: '/payment'})}>Proceed</Button>
+                bssize="large" type="submit">Add User</Button>
+              
+             
             </div>
           </form>
         </div>
-        <Footer />
+        <Footer/>
       </div>
     );
   }

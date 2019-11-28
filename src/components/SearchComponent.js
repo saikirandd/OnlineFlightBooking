@@ -112,7 +112,8 @@ export default class SearchComponent extends Component {
            
             <div className="createAccount mt20">
               <Button 
-                bssize="large" type="submit">Search</Button>
+                bssize="large" type="submit" onClick={()=>this.props.history.push(
+                  {pathname: '/searchResults'})}>Search</Button>
             </div>
           </form>
         </div>

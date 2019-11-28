@@ -59,6 +59,11 @@ input, select{
     flex-direction: column;
     margin-bottom: 10px;
 }
+.mb10{
+    margin-bottom: 10px;
+    border: outset;
+    padding: 12px;
+}
 
 .contactnoInput::-webkit-inner-spin-button, 
 .contactnoInput::-webkit-outer-spin-button { 
@@ -80,3 +85,17 @@ input, select{
     flex-direction: column;
     align-items: center;
 }
+.vertical-center{
+    margin: auto;
+}
+.h5, h5 {
+    font-size: 1.50rem !important;
+}
+
+    .yourtrips .col-md-1,
+    .yourtrips .col-sm-1,
+    .yourtrips .col-lg-1 {
+        max-width: 30.285714%;
+        width: 28%;
+        flex: 0 0 13.333333%;  
+    }

@@ -7,10 +7,8 @@ import Footer from "./footer"
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import FlashMessage from 'react-flash-message'
-import axios from 'axios';
-import { store } from 'react-notifications-component';
 
-export default class Login extends Component {
+export default class AdminLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,43 +35,7 @@ export default class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    axios.post('http://localhost:5000/users/login', userData)
-    .then(res => {
-          console.log(res.data)
-          if(res.data.code == 200){
-          store.addNotification({
-            title: "Successful login",
-            message: "Your login is successful !!!",
-            type: "success",
-            insert: "top",
-            container: "top-right",
-            animationIn: ["animated", "fadeIn"],
-            animationOut: ["animated", "fadeOut"],
-            width: 300,
-            dismiss: {
-              duration: 5000,
-              onScreen: true
-            }
-          });
-          this.props.history.push({pathname: '/listofflights'})
-        }
-        else{
-          store.addNotification({
-            title: "Invalid",
-            message: "Email id or password is incorrect",
-            type: "success",
-            insert: "top",
-            container: "top-right",
-            animationIn: ["animated", "fadeIn"],
-            animationOut: ["animated", "fadeOut"],
-            width: 300,
-            dismiss: {
-              duration: 5000,
-              onScreen: true
-            }
-          });
-        }
-    });
+    
   }
 
   render() {
@@ -103,15 +65,18 @@ export default class Login extends Component {
             />
         
           </FormGroup>
+          
           <Button
             block
             bssize="large"
             disabled={!this.validateForm()}
             type="submit"
+            
           >
           
             Login
           </Button>
+        
           <Link to="/forgotPassword" variant="body2">
                       Forgot password?
               </Link>

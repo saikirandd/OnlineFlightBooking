@@ -15,7 +15,7 @@ export default class Footer extends Component {
                 <MDBCol md="6">
                   <h5 className="title">Any help</h5>
                   <p>
-                   Mail to S53465@nwmissouri.edu
+                   Mail to S534625@nwmissouri.edu
                   </p>
                 </MDBCol>
                 

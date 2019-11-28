@@ -7,6 +7,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Footer from "./footer"
 import classnames from "classnames";
+import axios from 'axios';
+import { store } from 'react-notifications-component';
 
 export default class Signup extends Component {
 
@@ -19,7 +21,8 @@ export default class Signup extends Component {
       email: "",
       password: "",
       confirmpassword: "",
-      contactno: ""
+      contactno: "",
+      errors:""
       
     };
     this.handleValueChange = this.handleValueChange.bind(this);
@@ -52,9 +55,42 @@ export default class Signup extends Component {
       lastName: this.state.lastName,
       email: this.state.email,
       password: this.state.password,
-      password2: this.state.confirmpassword,
       contactNo: this.state.contactno
     };
+    var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+        if(regularExpression.test(this.state.password)){
+        if (this.state.password == this.state.confirmpassword) {
+          axios.post('http://localhost:5000/users/add', newUser)
+          .then(res => {
+                console.log(res.data)
+                store.addNotification({
+                  title: "Account created !",
+                  message: "Your account is created, now you can login",
+                  type: "success",
+                  insert: "top",
+                  container: "top-right",
+                  animationIn: ["animated", "fadeIn"],
+                  animationOut: ["animated", "fadeOut"],
+                  width: 300,
+                  dismiss: {
+                    duration: 5000,
+                    onScreen: true
+                  }
+                });
+                this.props.history.push({pathname: '/'})
+          });
+        }
+        else {
+            this.setState({
+                errors: "Passwords should match"
+            });
+        }
+    }
+    else{
+        this.setState({
+            errors: "Password must be atlease 6 characters and should contain atleast one number and one special character"
+        });
+    }
    
   }
 
@@ -137,6 +173,9 @@ export default class Signup extends Component {
                       Already have an account?
               </Link>
             </div>
+            <span className="text-danger">
+                            {this.state.errors}
+            </span>
           </form>
         </div>
         <Footer/>
