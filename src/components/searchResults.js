@@ -19,14 +19,44 @@ export default class SearchResults extends Component {
       flights: [{
         departing: {
           airlinesName: "American airlines",
-          flightTime: "9:45 PM - 10:44 AM +1",
-          totalHours: "13h 59m(2 stops)",
+          flightTime: "9:45 PM - 10:44 AM ",
+          totalHours: "13h 59m(1 stop)",
+          routes: "EWR - DEN - MCI"
+        },
+        arriving: {
+          airlinesName: "British Airways",
+          flightTime: "10:00 AM - 12:44 AM +1",
+          totalHours: "25h 34m(1 stop)",
+          routes: "MCI - MSP - EWR"
+        },
+        price: '200$'
+      },
+      {
+        departing: {
+          airlinesName: "Lufthansa",
+          flightTime: "7:35 PM - 10:45 AM +1",
+          totalHours: "23h 50m(2 stops)",
+          routes: "EWR - MUN - MCI"
+        },
+        arriving: {
+          airlinesName: "Lufthansa",
+          flightTime: "5:45 PM - 6:44 AM +1",
+          totalHours: "23h 59m(2 stops)",
+          routes: "MCI - DEN - EWR"
+        },
+        price: '200$'
+      },
+      {
+        departing: {
+          airlinesName: "Qatar airways",
+          flightTime: "9:30 PM - 11:49 AM +1",
+          totalHours: "20h 59m(2 stops)",
           routes: "EWR - MSP - DEN - MCI"
         },
         arriving: {
-          airlinesName: "American airlines",
+          airlinesName: "United airlines",
           flightTime: "9:45 PM - 10:44 AM +1",
-          totalHours: "13h 59m(2 stops)",
+          totalHours: "21h 59m(2 stops)",
           routes: "MCI - DEN - MSP - EWR"
         },
         price: '200$'
@@ -34,38 +64,8 @@ export default class SearchResults extends Component {
       {
         departing: {
           airlinesName: "American airlines",
-          flightTime: "9:45 PM - 10:44 AM +1",
-          totalHours: "13h 59m(2 stops)",
-          routes: "EWR - MSP - DEN - MCI"
-        },
-        arriving: {
-          airlinesName: "American airlines",
-          flightTime: "9:45 PM - 10:44 AM +1",
-          totalHours: "13h 59m(2 stops)",
-          routes: "MCI - DEN - MSP - EWR"
-        },
-        price: '200$'
-      },
-      {
-        departing: {
-          airlinesName: "American airlines",
-          flightTime: "9:45 PM - 10:44 AM +1",
-          totalHours: "13h 59m(2 stops)",
-          routes: "EWR - MSP - DEN - MCI"
-        },
-        arriving: {
-          airlinesName: "American airlines",
-          flightTime: "9:45 PM - 10:44 AM +1",
-          totalHours: "13h 59m(2 stops)",
-          routes: "MCI - DEN - MSP - EWR"
-        },
-        price: '200$'
-      },
-      {
-        departing: {
-          airlinesName: "American airlines",
-          flightTime: "9:45 PM - 10:44 AM +1",
-          totalHours: "13h 59m(2 stops)",
+          flightTime: "3:21 PM - 4:44 AM +1",
+          totalHours: "24h 59m(2 stops)",
           routes: "EWR - MSP - DEN - MCI"
         },
         arriving: {

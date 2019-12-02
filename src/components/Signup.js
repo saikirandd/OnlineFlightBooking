@@ -103,7 +103,7 @@ export default class Signup extends Component {
           <h2>Create Account</h2>
           <form onSubmit={this.handleSubmit}>
             <div className="inputBox width70">
-              <label htmlFor="firstName">First Name</label>
+              <label htmlFor="firstName">First Name*</label>
               <input
                 type="text"
                 placeholder="First Name"
@@ -113,7 +113,7 @@ export default class Signup extends Component {
               />           
             </div>
             <div className="inputBox width70">
-              <label htmlFor="lastName">Last Name</label>
+              <label htmlFor="lastName">Last Name*</label>
               <input
                 type="text"
                 placeholder="Last Name"
@@ -123,7 +123,7 @@ export default class Signup extends Component {
               />
             </div>
             <div className="inputBox width70">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">Email*</label>
               <input
                 type="text"
                 placeholder="Email"
@@ -145,7 +145,7 @@ export default class Signup extends Component {
               />
             </div>
             <div className="inputBox width50" style={{float:'left', 'margin-right': '2%'}}>
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">Password*</label>
               <input
                 type="password"
                 className="password"
@@ -156,7 +156,7 @@ export default class Signup extends Component {
               />
             </div>
             <div className="inputBox width50 ml2">
-              <label htmlFor="password">Confirm Password</label>
+              <label htmlFor="password">Confirm Password*</label>
               <input
                 type="password"
                 className="password"
